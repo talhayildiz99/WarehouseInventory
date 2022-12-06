@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "Add";
+    Layout = "~/Views/Shared/_Main.cshtml";
+}
+
+<h2>Add</h2>
+
+@{
+    if (ViewBag.Message != null)
+    {
+        <span>Hata= @ViewBag.Message.ToString()</span>
+    }
+}
+
+@using (Html.BeginForm("Add", "Warehouses", FormMethod.Post))
+{
+    <span>WarehouseName: <input type="text" name="TxtWarehouseName" /> </span>
+    <br />
+    <input type="submit" value="Kaydet" />
+}

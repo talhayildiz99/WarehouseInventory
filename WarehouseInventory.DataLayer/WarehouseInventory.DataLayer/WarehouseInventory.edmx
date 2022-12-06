@@ -1,0 +1,165 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DbInventoryModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="TblInventories">
+          <Key>
+            <PropertyRef Name="InventoryId" />
+          </Key>
+          <Property Name="InventoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WarehousesId" Type="int" />
+          <Property Name="InventoryName" Type="nvarchar" MaxLength="200" />
+          <Property Name="InventoryGuid" Type="uniqueidentifier" />
+          <Property Name="RowVersion" Type="timestamp" StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="TblWarehouses">
+          <Key>
+            <PropertyRef Name="WarehousesId" />
+          </Key>
+          <Property Name="WarehousesId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WarehouseName" Type="nvarchar" MaxLength="100" />
+          <Property Name="WarehouseGuid" Type="uniqueidentifier" />
+          <Property Name="RowVersion" Type="timestamp" StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DbInventory.dbo.VwWarehousesInventories' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VwWarehousesInventories">
+          <Key>
+            <PropertyRef Name="WarehousesId" />
+            <PropertyRef Name="InventoryId" />
+          </Key>
+          <Property Name="WarehousesId" Type="int" Nullable="false" />
+          <Property Name="WarehouseName" Type="nvarchar" MaxLength="100" />
+          <Property Name="WarehouseGuid" Type="uniqueidentifier" />
+          <Property Name="RowVersion" Type="timestamp" StoreGeneratedPattern="Computed" />
+          <Property Name="InventoryId" Type="int" Nullable="false" />
+          <Property Name="InventoryName" Type="nvarchar" MaxLength="200" />
+          <Property Name="InventoryGuid" Type="uniqueidentifier" />
+          <Property Name="InventoryRowVersion" Type="timestamp" StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityContainer Name="DbInventoryModelStoreContainer">
+          <EntitySet Name="TblInventories" EntityType="Self.TblInventories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblWarehouses" EntityType="Self.TblWarehouses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VwWarehousesInventories" EntityType="Self.VwWarehousesInventories" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VwWarehousesInventories].[WarehousesId] AS [WarehousesId], 
+    [VwWarehousesInventories].[WarehouseName] AS [WarehouseName], 
+    [VwWarehousesInventories].[WarehouseGuid] AS [WarehouseGuid], 
+    [VwWarehousesInventories].[RowVersion] AS [RowVersion], 
+    [VwWarehousesInventories].[InventoryId] AS [InventoryId], 
+    [VwWarehousesInventories].[InventoryName] AS [InventoryName], 
+    [VwWarehousesInventories].[InventoryGuid] AS [InventoryGuid], 
+    [VwWarehousesInventories].[InventoryRowVersion] AS [InventoryRowVersion]
+    FROM [dbo].[VwWarehousesInventories] AS [VwWarehousesInventories]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DbInventoryModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="TblInventories">
+          <Key>
+            <PropertyRef Name="InventoryId" />
+          </Key>
+          <Property Name="InventoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WarehousesId" Type="Int32" />
+          <Property Name="InventoryName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="InventoryGuid" Type="Guid" />
+          <Property Name="RowVersion" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="TblWarehouses">
+          <Key>
+            <PropertyRef Name="WarehousesId" />
+          </Key>
+          <Property Name="WarehousesId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WarehouseName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="WarehouseGuid" Type="Guid" />
+          <Property Name="RowVersion" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="VwWarehousesInventories">
+          <Key>
+            <PropertyRef Name="WarehousesId" />
+            <PropertyRef Name="InventoryId" />
+          </Key>
+          <Property Name="WarehousesId" Type="Int32" Nullable="false" />
+          <Property Name="WarehouseName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="WarehouseGuid" Type="Guid" />
+          <Property Name="RowVersion" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="InventoryId" Type="Int32" Nullable="false" />
+          <Property Name="InventoryName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="InventoryGuid" Type="Guid" />
+          <Property Name="InventoryRowVersion" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityContainer Name="DbInventoryEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="TblInventories" EntityType="Self.TblInventories" />
+          <EntitySet Name="TblWarehouses" EntityType="Self.TblWarehouses" />
+          <EntitySet Name="VwWarehousesInventories" EntityType="Self.VwWarehousesInventories" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DbInventoryModelStoreContainer" CdmEntityContainer="DbInventoryEntities">
+          <EntitySetMapping Name="TblInventories">
+            <EntityTypeMapping TypeName="DbInventoryModel.TblInventories">
+              <MappingFragment StoreEntitySet="TblInventories">
+                <ScalarProperty Name="InventoryId" ColumnName="InventoryId" />
+                <ScalarProperty Name="WarehousesId" ColumnName="WarehousesId" />
+                <ScalarProperty Name="InventoryName" ColumnName="InventoryName" />
+                <ScalarProperty Name="InventoryGuid" ColumnName="InventoryGuid" />
+                <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblWarehouses">
+            <EntityTypeMapping TypeName="DbInventoryModel.TblWarehouses">
+              <MappingFragment StoreEntitySet="TblWarehouses">
+                <ScalarProperty Name="WarehousesId" ColumnName="WarehousesId" />
+                <ScalarProperty Name="WarehouseName" ColumnName="WarehouseName" />
+                <ScalarProperty Name="WarehouseGuid" ColumnName="WarehouseGuid" />
+                <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VwWarehousesInventories">
+            <EntityTypeMapping TypeName="DbInventoryModel.VwWarehousesInventories">
+              <MappingFragment StoreEntitySet="VwWarehousesInventories">
+                <ScalarProperty Name="WarehousesId" ColumnName="WarehousesId" />
+                <ScalarProperty Name="WarehouseName" ColumnName="WarehouseName" />
+                <ScalarProperty Name="WarehouseGuid" ColumnName="WarehouseGuid" />
+                <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
+                <ScalarProperty Name="InventoryId" ColumnName="InventoryId" />
+                <ScalarProperty Name="InventoryName" ColumnName="InventoryName" />
+                <ScalarProperty Name="InventoryGuid" ColumnName="InventoryGuid" />
+                <ScalarProperty Name="InventoryRowVersion" ColumnName="InventoryRowVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

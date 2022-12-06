@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_Main.cshtml";
+}
+
+<h2>Detail</h2>
+@{ 
+
+    if (ViewBag.Detail!=null)
+    {
+        WarehouseInventory.DataLayer.TblWarehouses WarehouseDetail =
+            (WarehouseInventory.DataLayer.TblWarehouses)ViewBag.Detail;
+        <span>Depo Adı: @WarehouseDetail.WarehouseName</span>
+    }
+
+}
+

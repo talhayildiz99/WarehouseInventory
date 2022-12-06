@@ -1,0 +1,51 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Main.cshtml";
+    List<WarehouseInventory.DataLayer.TblWarehouses> warehouses =
+        new List<WarehouseInventory.DataLayer.TblWarehouses>();
+
+    List<WarehouseInventory.DataLayer.TblInventories> inventories =
+        new List<WarehouseInventory.DataLayer.TblInventories>();
+
+    if (ViewBag.Warehouses != null)
+    {
+        warehouses = (List<WarehouseInventory.DataLayer.TblWarehouses>)ViewBag.Warehouses;
+    }
+
+    if (ViewBag.InventoryList!=null)
+    {
+        inventories = (List<WarehouseInventory.DataLayer.TblInventories>)ViewBag.InventoryList;
+    }
+}
+
+<h2>Index Inventory</h2>
+
+@using (Html.BeginForm("Index", "Inventory", FormMethod.Get))
+{
+    <label for="CmbWarehouse">Depo Seçin:</label>
+    <select name="CmbWarehouse">
+        <option value="">Depo Seç</option>
+        @{
+            foreach (var Warehouse in warehouses)
+            {
+                <option value="@Warehouse.WarehousesId.ToString()">
+                    @Warehouse.WarehouseName
+                </option>
+            }
+        }
+    </select>    
+    <input type="submit" value="Sorgula" />
+}
+
+@{ 
+    if (inventories.Count > 0)
+    {
+        foreach (var inventorie in inventories)
+        {
+            <a href="~/Inventory/InventoryDetail?InventoryGuid=@inventorie.InventoryGuid.Value.ToString()">@inventorie.InventoryName</a>
+            <br />
+        }
+    }
+}
+

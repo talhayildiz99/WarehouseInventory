@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewBag.Title = "InventoryDetail";
+    Layout = "~/Views/Shared/_Main.cshtml";
+
+    WarehouseInventory.DataLayer.TblInventories InventorieDetail = 
+        new WarehouseInventory.DataLayer.TblInventories();
+
+    if (ViewBag.InventoryDetail != null)
+    {
+        InventorieDetail = 
+            (WarehouseInventory.DataLayer.TblInventories)ViewBag.InventoryDetail;
+    }
+}
+
+<h2>InventoryDetail</h2>
+
+
+@{ 
+    <label>@InventorieDetail.InventoryName</label>
+}
+
+

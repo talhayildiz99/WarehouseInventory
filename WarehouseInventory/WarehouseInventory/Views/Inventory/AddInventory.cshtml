@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewBag.Title = "AddInventory";
+    Layout = "~/Views/Shared/_Main.cshtml";
+    List<WarehouseInventory.DataLayer.TblWarehouses> warehouses =
+        new List<WarehouseInventory.DataLayer.TblWarehouses>();
+
+    if (ViewBag.Warehouses != null)
+    {
+        warehouses = (List<WarehouseInventory.DataLayer.TblWarehouses>)ViewBag.Warehouses;
+    }
+
+}
+
+<h2>AddInventory</h2>
+@using (Html.BeginForm("AddInventory", "Inventory", FormMethod.Post))
+{
+    <label for="CmbWarehouse">Depo Seçin:</label>
+    <select name="CmbWarehouse">
+        <option value="">Depo Seç</option>
+        @{
+            foreach (var Warehouse in warehouses)
+            {
+                <option value="@Warehouse.WarehousesId.ToString()">
+                    @Warehouse.WarehouseName
+                </option>
+            }
+        }
+    </select>
+    <br />
+    <label for="TxtInventoryName">Ürün Adı:</label>
+    <input type="text" name="TxtInventoryName" />
+    <br />
+    <input type="submit" value="Kaydet" />
+}
+
+@{
+    if (ViewBag.Error != null)
+    {
+        <h4>@ViewBag.Error</h4>
+    }
+    if (ViewBag.Success != null)
+    {
+        <h4>@((bool)ViewBag.Success ? "Eklendi" : ViewBag.Error )</h4>
+    }
+}
